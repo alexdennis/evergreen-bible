@@ -9,7 +9,7 @@ It is powered by a knowledge graph representation of the Bible that is symbolic.
 Our language experts, codify translations that use language models and statical analysis of common usage patterns in a specific locale to produce the final results.  This means that the language stays relevant and fresh and new versions automatically get released regularly.
 
 
-A core feature is the option to return synthesized speech as well as text. An other feature is a search API that takes text, sound or even images as input.
+A core feature is the option to return synthesized speech as well as text. Another feature is a search API that takes text, sound or even images as input.
 
 Launching along side the API, is the Evergreen Bible art generator which comes with a visual search. Point your camera at a babbling brook or a mountain, and the search  finds matching verses that you  can use as overlay before you share to social media. 
 
