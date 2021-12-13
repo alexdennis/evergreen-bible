@@ -1,0 +1,77 @@
+'''e.g. en-US'''
+scalar LocaleString
+
+type Query {
+  locales: ListOfLocales!
+  books(locale: LocaleString!): ListOfBooks!
+  textSearch (locale: LocaleString!, text: String!): SearchResult!
+  imageSearch (locale: LocaleString!, image: ImageSearchInput!): SearchResult!
+  audioSearch (locale: LocaleString!, audio: AudioSearchInput!): SearchResult! 
+}
+
+type Book {
+  id: ID!
+  name: String!
+  chapters: ListOfChapters!
+  locale: Locale!
+}
+
+type Chapter {
+  id: ID!
+  book: Book!
+  number: Number!
+  verses: ListOfVerses!
+  locale: Locale!
+}
+
+type Verse {
+  id: ID!
+  text: String!
+  chapter: Chapter!
+  book: Book!
+  locale: Locale!
+  speech: URL!
+}
+
+type Locale {
+  id: ID!
+  name: LocaleString!
+  mapCoords: [Coords!]!
+}
+
+type Coord {
+  lat: Number!
+  lng: Number!
+}
+
+union SearchResult = ListOfVerses | SearchError
+
+type SearchError {
+  message: String!
+}
+
+type ListOfBooks {
+  nodes: [Book!]!
+}
+
+type ListOfChapters {
+  nodes: [Chapter!]!
+}
+
+type ListOfVerses {
+  nodes: [Verse!]!
+}
+
+type ListOfLocales {
+  nodes: [Locale!]!
+}
+
+input ImageSearchInput {
+  imageUrl: URL
+  imageData: String
+}
+
+input AudioSearchInput {
+  audioUrl: URL
+  audioData: String
+}
