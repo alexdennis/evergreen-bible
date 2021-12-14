@@ -19,13 +19,14 @@ type Book {
 type Chapter {
   id: ID!
   book: Book!
-  number: Number!
+  number: Int!
   verses: ListOfVerses!
   locale: Locale!
 }
 
 type Verse {
   id: ID!
+  number: Int!
   text: String!
   chapter: Chapter!
   book: Book!
