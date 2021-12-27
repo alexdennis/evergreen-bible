@@ -1,10 +1,17 @@
-'''e.g. en-US'''
+"e.g. en-US. See https://tools.ietf.org/rfc/bcp/bcp47.txt"
 scalar LocaleString
+"Uniform Resource Locator. See https://datatracker.ietf.org/doc/html/rfc1738"
+scalar URL
+
+enum SortOrderOptions {
+  ASC
+  DESC
+}
 
 type Query {
   locales: ListOfLocales!
-  books(locale: LocaleString!): ListOfBooks!
-  textSearch (locale: LocaleString!, text: String!): SearchResult!
+  books(locale: LocaleString!, filter: BooksSearchFilterInput): ListOfBooks!
+  textSearch (locale: LocaleString!, text: TextSearchInput!): SearchResult!
   imageSearch (locale: LocaleString!, image: ImageSearchInput!): SearchResult!
   audioSearch (locale: LocaleString!, audio: AudioSearchInput!): SearchResult! 
 }
@@ -12,7 +19,7 @@ type Query {
 type Book {
   id: ID!
   name: String!
-  chapters: ListOfChapters!
+  chapters(after: String, first: Int, sortOrder: SortOrderOptions = ASC): ListOfChapters!
   locale: Locale!
 }
 
@@ -20,7 +27,7 @@ type Chapter {
   id: ID!
   book: Book!
   number: Int!
-  verses: ListOfVerses!
+  verses(after: String, first: Int, sortOrder: SortOrderOptions = ASC): ListOfVerses!
   locale: Locale!
 }
 
@@ -37,10 +44,10 @@ type Verse {
 type Locale {
   id: ID!
   name: LocaleString!
-  mapCoords: [Coords!]!
+  mapCoords: [MapCoord!]!
 }
 
-type Coord {
+type MapCoord {
   lat: Number!
   lng: Number!
 }
@@ -49,30 +56,87 @@ union SearchResult = ListOfVerses | SearchError
 
 type SearchError {
   message: String!
+  speech: URL!
+}
+
+type PageInfo {
+  endCursor: String!
+  hasNextPage: Boolean!
 }
 
 type ListOfBooks {
-  nodes: [Book!]!
+  edges: [BookEdge!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type BookEdge {
+  node: Book!
+  cursor: String!
 }
 
 type ListOfChapters {
-  nodes: [Chapter!]!
+  edges: [ChapterEdge!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type ChapterEdge {
+  node: Chapter!
+  cursor: String!
 }
 
 type ListOfVerses {
-  nodes: [Verse!]!
+  edges: [VerseEdge!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type VerseEdge {
+  node: Verse!
+  cursor: String!
 }
 
 type ListOfLocales {
-  nodes: [Locale!]!
+  edges: [LocaleEdge!]!
+  totalCount: Int!
+  pageInfo: PageInfo!
+}
+
+type LocaleEdge {
+  node: Locale!
+  cursor: String!
+}
+
+input BooksSearchFilterInput {
+  after: String
+  first: Int
+  sortOrder: SortOrderOptions = ASC
+}
+
+input TextSearchInput {
+  text: String!
+  after: String
+  first: Int
+  sortOrder: SortOrderOptions = ASC
 }
 
 input ImageSearchInput {
+  "Image URL required if no `imageData`"
   imageUrl: URL
+  "Image data required if no `imageUrl`. Image data needs to be base64 encoded"
   imageData: String
+  after: String
+  first: Int
+  sortOrder: SortOrderOptions = ASC
 }
 
 input AudioSearchInput {
+  "Audio URL required if no `audioData`"
   audioUrl: URL
+  "Audio data required if no `audioUrl`. Audio data needs to be base64 encoded"
   audioData: String
+  after: String
+  first: Int
+  sortOrder: SortOrderOptions = ASC
 }
