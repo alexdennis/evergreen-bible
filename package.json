@@ -1,0 +1,22 @@
+{
+  "name": "evergreen-bible",
+  "version": "1.0.0",
+  "description": "An AI driven approach to bible translation delivered via API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexdennis/evergreen-bible.git"
+  },
+  "author": "Alex Dennis <alex.dennis@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexdennis/evergreen-bible/issues"
+  },
+  "homepage": "https://github.com/alexdennis/evergreen-bible#readme",
+  "workspaces": [
+    "packages/docs"
+  ]
+}
