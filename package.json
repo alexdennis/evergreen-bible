@@ -18,6 +18,8 @@
   "homepage": "https://github.com/alexdennis/evergreen-bible#readme",
   "workspaces": [
     "packages/docs",
-    "packages/schema"
+    "packages/schema",
+    "packages/infra",
+    "packages/api-backend"
   ]
 }
