@@ -1,11 +1,11 @@
-"""
-A (potentially binary) string encoded using base64.
-"""
+"A (potentially binary) string encoded using base64."
 scalar Base64String
+
 """
 e.g. en-US. See https://tools.ietf.org/rfc/bcp/bcp47.txt"
 """
 scalar LocaleString
+
 """
 An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.
 """
@@ -64,8 +64,8 @@ type Locale {
 }
 
 type MapCoord {
-  lat: Number!
-  lng: Number!
+  lat: Float!
+  lng: Float!
 }
 
 union SearchResult = ListOfVerses | SearchError

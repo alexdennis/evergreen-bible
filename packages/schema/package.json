@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,9 @@
   "homepage": "https://github.com/alexdennis/evergreen-bible#readme",
   "devDependencies": {
     "prettier": "^2.5.1"
+  },
+  "dependencies": {
+    "graphql": "^16.2.0",
+    "graphql-tag": "^2.12.6"
   }
 }
