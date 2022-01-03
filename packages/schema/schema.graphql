@@ -19,15 +19,19 @@ enum SortOrderOptions {
 type Query {
   locales: ListOfLocales!
   books(locale: LocaleString!, filter: BooksSearchFilterInput): ListOfBooks!
-  textSearch (locale: LocaleString!, text: TextSearchInput!): SearchResult!
-  imageSearch (locale: LocaleString!, image: ImageSearchInput!): SearchResult!
-  audioSearch (locale: LocaleString!, audio: AudioSearchInput!): SearchResult! 
+  textSearch(locale: LocaleString!, text: TextSearchInput!): SearchResult!
+  imageSearch(locale: LocaleString!, image: ImageSearchInput!): SearchResult!
+  audioSearch(locale: LocaleString!, audio: AudioSearchInput!): SearchResult!
 }
 
 type Book {
   id: ID!
   name: String!
-  chapters(after: String, first: Int, sortOrder: SortOrderOptions = ASC): ListOfChapters!
+  chapters(
+    after: String
+    first: Int
+    sortOrder: SortOrderOptions = ASC
+  ): ListOfChapters!
   locale: Locale!
 }
 
@@ -35,7 +39,11 @@ type Chapter {
   id: ID!
   book: Book!
   number: Int!
-  verses(after: String, first: Int, sortOrder: SortOrderOptions = ASC): ListOfVerses!
+  verses(
+    after: String
+    first: Int
+    sortOrder: SortOrderOptions = ASC
+  ): ListOfVerses!
   locale: Locale!
 }
 
