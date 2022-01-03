@@ -1,7 +1,15 @@
-"e.g. en-US. See https://tools.ietf.org/rfc/bcp/bcp47.txt"
+"""
+A (potentially binary) string encoded using base64.
+"""
+scalar Base64String
+"""
+e.g. en-US. See https://tools.ietf.org/rfc/bcp/bcp47.txt"
+"""
 scalar LocaleString
-"Uniform Resource Locator. See https://datatracker.ietf.org/doc/html/rfc1738"
-scalar URL
+"""
+An RFC 3986, RFC 3987, and RFC 6570 (level 4) compliant URI string.
+"""
+scalar URI
 
 enum SortOrderOptions {
   ASC
@@ -38,7 +46,7 @@ type Verse {
   chapter: Chapter!
   book: Book!
   locale: Locale!
-  speech: URL!
+  speechUrl: URI!
 }
 
 type Locale {
@@ -56,7 +64,7 @@ union SearchResult = ListOfVerses | SearchError
 
 type SearchError {
   message: String!
-  speech: URL!
+  speechUrl: URI!
 }
 
 type PageInfo {
@@ -123,9 +131,9 @@ input TextSearchInput {
 
 input ImageSearchInput {
   "Image URL required if no `imageData`"
-  imageUrl: URL
+  imageUrl: URI
   "Image data required if no `imageUrl`. Image data needs to be base64 encoded"
-  imageData: String
+  imageData: Base64String
   after: String
   first: Int
   sortOrder: SortOrderOptions = ASC
@@ -133,9 +141,9 @@ input ImageSearchInput {
 
 input AudioSearchInput {
   "Audio URL required if no `audioData`"
-  audioUrl: URL
+  audioUrl: URI
   "Audio data required if no `audioUrl`. Audio data needs to be base64 encoded"
-  audioData: String
+  audioData: Base64String
   after: String
   first: Int
   sortOrder: SortOrderOptions = ASC

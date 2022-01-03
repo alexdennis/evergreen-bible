@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/alexdennis/evergreen-bible/issues"
   },
-  "homepage": "https://github.com/alexdennis/evergreen-bible#readme"
+  "homepage": "https://github.com/alexdennis/evergreen-bible#readme",
+  "devDependencies": {
+    "prettier": "^2.5.1"
+  }
 }
