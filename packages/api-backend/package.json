@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "copy-schema": "cp -TR ../schema node_modules/schema",
+    "build": "npm run copy-schema",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/alexdennis/evergreen-bible/issues"
   },
-  "homepage": "https://github.com/alexdennis/evergreen-bible#readme"
+  "homepage": "https://github.com/alexdennis/evergreen-bible#readme",
+  "dependencies": {
+    "apollo-server": "^3.6.1",
+    "apollo-server-lambda": "^3.6.1",
+    "graphql": "^16.2.0"
+  }
 }
