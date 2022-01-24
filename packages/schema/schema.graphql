@@ -28,6 +28,7 @@ type Book {
   id: ID!
   name: String!
   chapters(
+    number: Int
     after: String
     first: Int
     sortOrder: SortOrderOptions = ASC
@@ -40,6 +41,7 @@ type Chapter {
   book: Book!
   number: Int!
   verses(
+    number: Int
     after: String
     first: Int
     sortOrder: SortOrderOptions = ASC
@@ -125,6 +127,7 @@ type LocaleEdge {
 }
 
 input BooksSearchFilterInput {
+  id: String
   after: String
   first: Int
   sortOrder: SortOrderOptions = ASC
