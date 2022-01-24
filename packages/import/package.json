@@ -1,0 +1,22 @@
+{
+  "name": "import",
+  "version": "1.0.0",
+  "description": "Initial import of the KJV",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexdennis/evergreen-bible.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/alexdennis/evergreen-bible/issues"
+  },
+  "homepage": "https://github.com/alexdennis/evergreen-bible#readme",
+  "dependencies": {
+    "sqlite3": "^5.0.2"
+  }
+}

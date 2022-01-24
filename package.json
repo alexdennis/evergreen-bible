@@ -20,7 +20,8 @@
     "packages/docs",
     "packages/schema",
     "packages/infra",
-    "packages/api-backend"
+    "packages/api-backend",
+    "packages/import"
   ],
   "devDependencies": {
     "prettier": "^2.5.1"
