@@ -1,9 +1,10 @@
-const { ApolloServer, gql } = require("apollo-server-lambda");
-const {
+import { ApolloServer, gql } from "apollo-server-lambda";
+import {
   ApolloServerPluginLandingPageGraphQLPlayground,
-} = require("apollo-server-core");
-const { schema } = require("schema");
-const { resolvers } = require("resolvers");
+} from "apollo-server-core";
+import { schema } from "schema";
+
+import { resolvers } from "./resolvers";
 
 const typeDefs = gql(schema.idl);
 

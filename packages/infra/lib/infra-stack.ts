@@ -18,7 +18,7 @@ export class InfraStack extends Stack {
     this.backendLambda = new lambda.Function(this, "graphql-backend", {
       runtime: lambda.Runtime.NODEJS_14_X,
       memorySize: 3008,
-      handler: "index.handler",
+      handler: "build/index.handler",
       code: lambda.Code.fromAsset(
         path.join(__dirname, "..", "..", "api-backend")
       ),

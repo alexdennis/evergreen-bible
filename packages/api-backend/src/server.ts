@@ -1,6 +1,7 @@
-const { ApolloServer, gql } = require("apollo-server");
-const { schema } = require("schema");
-const { resolvers } = require("./resolvers");
+import { ApolloServer, gql } from "apollo-server";
+import { schema } from "schema";
+
+import { resolvers } from "./resolvers";
 
 const typeDefs = gql(schema.idl);
 

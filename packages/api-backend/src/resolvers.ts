@@ -1,9 +1,7 @@
 /**
  * Module with graphql resolvers.
  */
-const sqlite3 = require("sqlite3").verbose();
-
-const db = new sqlite3.Database("./kjv.db");
+import {select} from "./db-utils";
 
 // const GET_ALL = "SELECT docid as id, c0book as book, c1chapter as chapter, c2verse as verse, c3content as content FROM bible_fts_content";
 const GET_BOOKS = "SELECT DISTINCT(book) FROM bible;";
@@ -17,7 +15,20 @@ const GET_VERSES_BY_BOOK_CHAPTER_VERSE =
 const LOCALES = ["en-US"]; // for now
 const UNSUPPORTED_LOCALE = "Unsupported locale";
 
-const resolvers = {
+type Book = {
+  book: string;
+}
+
+type Chapter = {
+  chapter: string;
+}
+
+type Verse = {
+  number: number;
+  text: string;
+}
+
+export const resolvers = {
   Query: {
     locales: () => ({
       edges: LOCALES.map((locale) => ({
@@ -32,8 +43,8 @@ const resolvers = {
 
       const books =
         filter != null && filter.id != null
-          ? await select(GET_BOOKS_BY_ID, filter.id)
-          : await select(GET_BOOKS);
+          ? await select<Book>(GET_BOOKS_BY_ID, filter.id)
+          : await select<Book>(GET_BOOKS);
       return {
         edges: books.map((book) => ({
           node: {
@@ -53,7 +64,7 @@ const resolvers = {
       const chapters =
         number != null
           ? [{ chapter: number }]
-          : await select(GET_CHAPTERS_BY_BOOK, book.id);
+          : await select<Chapter>(GET_CHAPTERS_BY_BOOK, book.id);
       return {
         edges: chapters.map((ch) => ({
           node: {
@@ -70,13 +81,13 @@ const resolvers = {
     verses: async (chapter, { number }) => {
       const verses =
         number != null
-          ? await select(
+          ? await select<Verse>(
               GET_VERSES_BY_BOOK_CHAPTER_VERSE,
               chapter.book.id,
               String(chapter.number),
               String(number)
             )
-          : await select(
+          : await select<Verse>(
               GET_VERSES_BY_BOOK_CHAPTER,
               chapter.book.id,
               String(chapter.number)
@@ -95,33 +106,3 @@ const resolvers = {
     },
   },
 };
-
-exports.resolvers = resolvers;
-
-// TODO: dbutils
-function select(query, ...params) {
-  return new Promise((resolve, reject) => {
-    // const db = new sqlite3.Database(database);
-    const queries = [];
-    db.each(
-      query,
-      ...params,
-      (err, row) => {
-        if (err) {
-          console.error(query, params, err);
-          reject(err); // optional: you might choose to swallow errors.
-        } else {
-          queries.push(row); // accumulate the data
-        }
-      },
-      (err) => {
-        if (err) {
-          console.error(query, params, err);
-          reject(err); // optional: again, you might choose to swallow this error.
-        } else {
-          resolve(queries); // resolve the promise
-        }
-      }
-    );
-  });
-}
