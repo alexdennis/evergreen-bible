@@ -30,6 +30,7 @@ Each vertex and edge will need a unique id, for this we will use `nanoid`. We co
 
 ## Graph Model
 
+```
               --->[Book]
               |     ^ 
               |     |- chapter_of_book
@@ -37,6 +38,7 @@ verse_of_book-| [Chapter]
               |     ^
               |     |- verse_of_chapter
               ---[Verse]
+```              
 
 ## Entities
 
