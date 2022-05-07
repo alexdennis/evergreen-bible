@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "outDir": "./build",
+        "target": "es2020",
+        "module": "commonjs",
+        "allowJs": true,
+        "esModuleInterop": true
+    },
+    "include": [
+        "./src/**/*"
+    ]
+}
