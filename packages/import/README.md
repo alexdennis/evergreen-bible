@@ -81,7 +81,7 @@ e2, v1, c1, verse_of_chapter
 
 ```
 ~id, ~from, ~to, ~label
-e3, v1, b1, chapter_of
+e3, v1, b1, verse_of_book
 ```
 
 ## Scripts
