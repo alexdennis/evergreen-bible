@@ -23,7 +23,7 @@ export class MonitoringStack extends Stack {
                 createDashboard: true,
                 createAlarmDashboard: true,
                 createSummaryDashboard: true,
-                renderingPreference: DashboardRenderingPreference.INTERACTIVE_AND_BITMAP
+                renderingPreference: DashboardRenderingPreference.INTERACTIVE_AND_BITMAP,
             }
         );
 
@@ -52,7 +52,7 @@ export class MonitoringStack extends Stack {
                         maxErrorRate: 50
                     }
                 }
-            })
+            });
 
         monitoring.addLargeHeader("Lambdas")
             .monitorLambdaFunction({
@@ -61,7 +61,9 @@ export class MonitoringStack extends Stack {
                     Warning: { maxLatency: Duration.millis(2400) },
                     Critical: { maxLatency: Duration.millis(4000) }
                 }
-            })
+            });
 
+        // monitoring.addLargeHeader("Billing")
+        //     .monitorBilling();
     }
 }
